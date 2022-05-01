@@ -1,0 +1,93 @@
+﻿@page "/regist"
+
+<h3>Registration</h3>
+
+<RegComponent RegistrationIsActive="true">
+
+</RegComponent>
+
+<form>
+  <div class="form-group mx-sm-2 mb-2">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" @bind-value="Login" placeholder="Enter email" width="30%">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group mx-sm-2 mb-2">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" @bind-value="Password1" placeholder="Password">
+  </div>
+  <div class="form-group mx-sm-2 mb-2">
+    <label for="exampleInputPassword2">Enter password once more</label>
+    <input type="password" class="form-control" id="exampleInputPassword2" @bind-value="Password2" placeholder="Password">
+  </div>
+  <div class="form-group mx-sm-2 mb-2">
+    <label for="name1">Name</label>
+    <input type="text" class="form-control" id="name1" @bind-value="Name" placeholder="Name">
+  </div>
+  <div class="form-group mx-sm-2 mb-4">
+    <label for="phone1">Phone</label>
+    <input type="text" class="form-control" id="phone1" @bind-value="Phone" placeholder="Phone">
+  </div>
+      <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+      <label class="form-check-label" for="inlineRadio1">снять жилье</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+    <label class="form-check-label" for="inlineRadio2">сдать жилье</label>
+  </div>
+  <button type="submit" class="btn btn-primary mx-sm-2" @onclick="RegistrationD">Sign Up</button><br/> 
+
+</form>
+
+@code {
+    private string Login;
+    private string Password; 
+    private string Password1;
+    private string Password2;
+    private string Name;
+    private string Surname;
+    private string Phone;
+
+
+    private void RegistrationD()
+    {
+        //User.GetDemoList(Name);
+        //User.AddUserToDB(new User(Login, Surname, Name, Phone));
+    }
+
+
+}
+
+
+
+
+@*<RegComponent RegistrationIsActive="true">
+    <ChildFragment>
+        <ButtonGroup content="qqq"/>
+    </ChildFragment>
+    
+</RegComponent>
+
+
+@code {
+    private string _login;
+    private string Name;
+    private string Surname;
+    private string Phone;
+    private string qq = "sdadasdads";
+
+    List<string> qqq = new List<string>() { "qwe", "ewq", "ddd.", "dsadsd", "dsdsdsdsdsdsd" };
+
+    private void RegistrationD()
+    {
+        _login = "";
+    }
+
+    private void Registration1()
+    {
+
+    }
+
+
+}*@

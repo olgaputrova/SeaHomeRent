@@ -51,11 +51,18 @@
 
     private void RegistrationD()
     {
-        //User.GetDemoList(Name);
-        User.AddUserToDB(new User(Login, Password1, Name, Phone));
+        if(Login != null && Login != "")
+        {
+            if (Password1 != null && Password1 != "")
+            {
+                if(Password1 == Password2)
+                {
+                    User.AddUserToDB(new User(Login, Password1, Name, Phone));
+                }
+            }
+        }
+        
     }
-
-
 }
 
 

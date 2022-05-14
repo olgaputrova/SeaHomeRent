@@ -14,8 +14,8 @@
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>*@
-  <a type="submit" class="btn btn-primary mx-sm-2 mb-2" href="account">Sign In</a><br/><br/>
- @* <a class="btn btn-success mx-sm-2" href="regist" role="button">Registration</a>*@
+  <a type="submit" class="btn btn-primary mx-sm-2 mb-2" href="account" @onclick="ToSignIn">Sign In</a><br/><br/>
+ 
 
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-success mx-sm-2" data-toggle="modal" data-target="#ModalCenter">
@@ -49,5 +49,19 @@
 
 
 @code {
+    private string Login;
+    private string Password;
+    
+    private void ToSignIn()
+    {
+        if(Login != null && Login != "")
+        {
+            if (Password != null && Password != "")
+            {
+                User.Authorization(Login, Password);
+            }
+        }
+        
+    }
 
 }

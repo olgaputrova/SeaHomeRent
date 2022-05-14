@@ -1,6 +1,13 @@
 ﻿@page "/account"
+@using SeaHome.Services
+@inject SingletonService singleton
+
 <h3>Personal Account</h3>
-<div class="modal" tabindex="-1" role="dialog">
+
+<div>@singleton.currentUser.Name</div>
+<div>@singleton.currentUser.Login</div>
+
+@*<div class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -18,7 +25,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>*@
 
 @code {
 

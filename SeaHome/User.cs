@@ -18,6 +18,11 @@ namespace SeaHome
             PhoneNumber = phoneNumber;
         }
         
+        public User ()
+        {
+
+        }
+        
         private string _login;
         private string _name;
         private string _password;

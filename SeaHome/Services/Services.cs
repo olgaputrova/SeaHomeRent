@@ -16,5 +16,11 @@ namespace SeaHome.Services
         //    Value = increment;
 
         //}
+        
+        public SingletonService()
+        {
+            currentUser = new User();
+            Console.WriteLine(currentUser.Name);
+        }
     }
 }

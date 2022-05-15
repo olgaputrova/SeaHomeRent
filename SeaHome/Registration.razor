@@ -51,9 +51,9 @@
 
     private void RegistrationD()
     {
-        if(Login != null && Login != "")
+        if(!string.IsNullOrEmpty(Login))
         {
-            if (Password1 != null && Password1 != "")
+            if (!string.IsNullOrEmpty(Password1))
             {
                 if(Password1 == Password2)
                 {

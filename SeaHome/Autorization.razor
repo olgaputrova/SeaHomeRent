@@ -58,9 +58,9 @@
     
     private void ToSignIn()
     {
-        if(Login != null && Login != "")
+        if(!string.IsNullOrEmpty(Login))
         {
-            if (Password != null && Password != "")
+            if (!string.IsNullOrEmpty(Password))
             {
                 singleton.currentUser = User.Authorization(Login, Password);
             }

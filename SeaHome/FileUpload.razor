@@ -5,9 +5,9 @@
 @inject IWebHostEnvironment Environment
 @inject IJSRuntime qqq
 
-<h3>Upload Files</h3>
+<h4>Добавьте изображение</h4>
 
-<p>
+@*<p>
     <label>
         Max file size:
         <input type="number" @bind="maxFileSize" />
@@ -19,7 +19,7 @@
         Max allowed files:
         <input type="number" @bind="maxAllowedFiles" />
     </label>
-</p>
+</p>*@
 
 <p>
     <label>
@@ -27,6 +27,7 @@
         <InputFile OnChange="@LoadFiles" multiple />
     </label>
 </p>
+
 
 @if (isLoading)
 {
@@ -51,8 +52,8 @@ else
 
 @code {
     private List<IBrowserFile> loadedFiles = new();
-    private long maxFileSize = 500000;
-    private int maxAllowedFiles = 3;
+    private long maxFileSize = 3000000;
+    private int maxAllowedFiles = 8;
     private bool isLoading;
     protected byte[] img;
 

@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="angular-google-maps" Version="2.4.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.15.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.15.1" />
+    <PackageReference Include="ZTGoogleAPI" Version="0.12.2.36640" />
   </ItemGroup>
 
 </Project>

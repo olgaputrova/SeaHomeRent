@@ -2,8 +2,12 @@
 @using System.IO
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Logging
+@using SeaHome.Services
 @inject IWebHostEnvironment Environment
 @inject IJSRuntime qqq
+@inject TransientService transientApartment
+@inject SingletonService singleton
+
 
 <h4>Добавьте изображение</h4>
 
@@ -72,10 +76,11 @@ else
                 var stream = file.OpenReadStream(maxFileSize);
                 img = new byte[stream.Length];
                 await stream.ReadAsync(img);
+                Apartament apartament = transientApartment.currentApartament;
 
                 isLoading = false;
-                ImgToDb.AddToDB(new ImgToDb("RandomName", img));
-
+                //ImgToDb.AddToDB(new ImgToDb(currentApartament, img));
+                DBMethods.AddImgToDB(new ImgToDb(apartament, img));
             }
 
             catch (Exception ex)

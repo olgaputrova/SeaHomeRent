@@ -62,7 +62,7 @@
         {
             if (!string.IsNullOrEmpty(Password))
             {
-                singleton.currentUser = User.Authorization(Login, Password);
+                singleton.currentUser = DBMethods.Authorization(Login, Password);
             }
         }
         

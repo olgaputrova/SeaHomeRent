@@ -88,7 +88,8 @@
             user = singleton.currentUser;
             apartament = new Apartament(user, text, floor, houseFloor, 1000);
             DBMethods.AddApartamentToDB(apartament);
-            transientApartment.currentApartament = apartament;
+            singleton.currentApartament = apartament;
+            //transientApartment.currentApartament = apartament;
         }
         
     }

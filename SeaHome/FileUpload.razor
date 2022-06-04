@@ -76,7 +76,8 @@ else
                 var stream = file.OpenReadStream(maxFileSize);
                 img = new byte[stream.Length];
                 await stream.ReadAsync(img);
-                Apartament apartament = transientApartment.currentApartament;
+                Apartament apartament = singleton.currentApartament;
+                //Apartament apartament = transientApartment.currentApartament;
 
                 isLoading = false;
                 //ImgToDb.AddToDB(new ImgToDb(currentApartament, img));

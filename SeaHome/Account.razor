@@ -8,6 +8,7 @@
 
 @if(string.IsNullOrEmpty(singleton.currentUser.Login))
 {
+    <br />
     <div>Войдите в Ваш аккаунт</div><br />
     <NavLink class="btn btn-primary" href="autorization">Войти</NavLink>
 }
@@ -25,7 +26,7 @@ else
 
 <div>
     <button type="submit" class="btn btn-primary" @onclick="EditPhone">мои объявления</button><br/>
-</div><br />
+</div><br /><br />
 
 
 <table>
@@ -89,3 +90,4 @@ else
     }
 
 }
+

@@ -42,12 +42,12 @@ namespace SeaHome.Services
             IMongoDatabase database = client.GetDatabase("Images");
             IGridFSBucket gridFs = new GridFSBucket(database);
 
-            using (Stream fs = new FileStream($"{Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/images/")}{filename}.jpg", FileMode.CreateNew))
+            using (Stream fs = new FileStream($"{Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/images/")}{filename}", FileMode.Create))
             {
                 //gridFs.DownloadToStreamByName("qqq.jpg", fs);
-                gridFs.DownloadToStreamByName($"{filename}.jpg", fs);
+                gridFs.DownloadToStreamByName(filename, fs);
                 //file = new FileInfo("boot.jpg");
-                file = new FileInfo($"{filename}.jpg");
+                file = new FileInfo(filename);
                              
                 Console.WriteLine(file.DirectoryName);
 

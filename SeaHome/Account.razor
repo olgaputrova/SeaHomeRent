@@ -4,8 +4,15 @@
 @inject ApartamentService apartmentService
 @inject GridFSService service
 
-<h3>Personal Account</h3>
+<h3>Личный кабинет</h3>
 
+@if(string.IsNullOrEmpty(singleton.currentUser.Login))
+{
+    <div>Войдите в Ваш аккаунт</div><br />
+    <NavLink class="btn btn-primary" href="autorization">Войти</NavLink>
+}
+else
+{
 <div>имя: @singleton.currentUser.Name</div>
 <div>логин/почта: @singleton.currentUser.Login</div>
 
@@ -59,6 +66,7 @@
                     }
                 }
 </table>
+}
 
 @*<div>@ShowAnnounces</div>*@
 

@@ -1,20 +1,20 @@
-﻿@page "/announce"
+﻿@page "/yourAnnounce"
 @using SeaHome.Services
 @inject TransientService transientApartment
 @inject SingletonService singleton
 
-<h3>Новое объявление</h3>
+<h3>Ваше объявление</h3>
 
 <form>
      <div class="form-group">
-        <label for="textareaAnnounce">Добавьте описание объекта</label>
-        <textarea class="form-control" id="textareaAnnounce" rows="3" @bind="@text">@singleton.currentUser.Name</textarea>
+        <label for="textareaAnnounce">описание объекта</label>
+        <textarea class="form-control" id="textareaAnnounce" rows="3" @bind="@text">@singleton.currentApartament.Text</textarea>
      </div><br/>
 
      <div>
         <label for="selectFloor">этаж</label>
         <select class="custom-select custom-select-lg mb-3" id="selectFloor" @bind="@floor">
-          
+          <option selected>@singleton.currentApartament.Floor</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -36,7 +36,7 @@
      
          <label for="selectHouseFloor">этажность здания</label>
          <select class="custom-select custom-select-lg mb-3" id="selectHouseFloor" @bind="@houseFloor">
-          @*<option selected>этажность здания</option>*@
+          <option selected>@singleton.currentApartament.HouseFloor</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -59,25 +59,15 @@
 
      <div class="form-group">
         <label for="inputPrice">стоимость аренды</label>
-        <input type="number" @bind-value="@price" id="inputPrice" />
+        <input type="number" @bind-value="@price" id="inputPrice" placeholder="@singleton.currentApartament.Price"></input>
      </div><br/>
      
   
 
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-      <label class="form-check-label" for="invalidCheck3">
-        Agree to terms and conditions
-      </label>
-      <div class="invalid-feedback">
-        You must agree before submitting.
-      </div>
-    </div>
-  </div>
-  <br />
+  
 
-  <NavLink class="btn btn-primary" type="submit" @onclick="RegistrationApartment" href="yourAnnounce">Добавить объявление</NavLink>
+  <button class="btn btn-primary" type="submit" @onclick="EditApartment">Редактировать объявление</button>
+  <button class="btn btn-danger" @onclick="DeleteApartament">Удалить объявление</button>
 </form>
 <br /><br />
 
@@ -90,28 +80,33 @@
       </div>
     </form>*@
 
-     @*<FileUpload></FileUpload>*@
+     <FileUpload></FileUpload>
 
 @code {
     private string text;
     private int floor; 
     private int houseFloor;
-    private double price = 1000;
+    private double price;
     private User user;
     private Apartament apartament;
 
 
-    public void RegistrationApartment()
+    public void EditApartment()
     {
         if(!string.IsNullOrEmpty(singleton.currentUser.Login))
         {
             user = singleton.currentUser;
             apartament = new Apartament(user, text, floor, houseFloor, price);
-            DBMethods.AddApartamentToDB(apartament);
+            DBMethods.EditApartamentDB (singleton.currentApartament, apartament);
             singleton.currentApartament = apartament;
             //transientApartment.currentApartament = apartament;
         }
-        
+    }
+
+    public void DeleteApartament()
+    {
+        DBMethods.RemoveImagesFromDB(singleton.currentApartament);
+        DBMethods.DeleteApartamentDB(singleton.currentApartament);
     }
 
 }

@@ -1,6 +1,5 @@
 ﻿@page "/regist"
 
-<h3>Registration</h3>
 
 @*<RegComponent_1 RegistrationIsActive="true">
 
@@ -31,14 +30,14 @@
     <label for="phone1">Phone</label>
     <input type="text" class="form-control" id="phone1" @bind-value="Phone" placeholder="Phone">
   </div>
-      <div class="form-check form-check-inline">
+  @*<div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
       <label class="form-check-label" for="inlineRadio1">снять жилье</label>
   </div>
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
     <label class="form-check-label" for="inlineRadio2">сдать жилье</label>
-  </div>
+  </div>*@
   <button type="submit" class="btn btn-primary mx-sm-2" @onclick="RegistrationD">Sign Up</button><br/> 
 
 </form>

@@ -16,23 +16,24 @@ namespace SeaHome
 
         private Apartament _apartament;
         public Apartament Apartament { get { return _apartament; } set { _apartament = value; } }
-        //public string Name { get; set; }
-        public byte[] img;
+        public string Name { get; set; }
+        //public byte[] img;
 
-        public ImgToDb(Apartament apartament, byte[] img)
+        public ImgToDb(Apartament apartament, string name)
         {
             Apartament = apartament;
-            this.img = img;
+            //this.img = img;
+            Name = name;
         }
 
 
-        public static void AddToDB(ImgToDb img)
-        {
-            var client = new MongoClient("mongodb://localhost");
-            var database = client.GetDatabase("SeaHome");
-            var collection = database.GetCollection<ImgToDb>("RandomName");
-            collection.InsertOne(img);
-        }
+        //public static void AddToDB(ImgToDb img)
+        //{
+        //    var client = new MongoClient("mongodb://localhost");
+        //    var database = client.GetDatabase("SeaHome");
+        //    var collection = database.GetCollection<ImgToDb>("Images");
+        //    collection.InsertOne(img);
+        //}
 
     }
 }

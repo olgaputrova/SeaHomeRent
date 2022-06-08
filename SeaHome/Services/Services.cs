@@ -9,21 +9,14 @@ namespace SeaHome.Services
     {
         public User currentUser; // { get; set; }
         public Apartament currentApartament;
-        //public int Value { get; set; }
-
-        //public void Inc(ref int increment)
-        //{
-        //    increment++;
-        //    Value = increment;
-
-        //}
-        
+                
         public SingletonService()
         {
             currentUser = new User();
             currentApartament = new Apartament();
             Console.WriteLine(currentUser.Name);
         }
+        
     }
 
     public class TransientService

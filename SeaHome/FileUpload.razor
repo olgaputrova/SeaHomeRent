@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Logging
 @using SeaHome.Services
+
 @inject IWebHostEnvironment Environment
 @inject IJSRuntime qqq
 @inject TransientService transientApartment
@@ -25,11 +26,17 @@
     </label>
 </p>*@
 
+@*<form>
+    <div class="form-group">
+        <label for="FormControlFile1">загрузить фото</label>
+        <input type="file" class="form-control-file" id="FormControlFile1">
+      </div>
+</form>*@
+
 <p>
-    <label>
         Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
-        <InputFile OnChange="@LoadFiles" multiple />
-    </label>
+        <InputFile OnChange="@LoadFiles" multiple="multiple" />
+    
 </p>
 
 
@@ -55,16 +62,22 @@ else
 }
 
 @code {
+    //User user = new User();
+    [Inject] GridFSService service{ get; set; }
+    
+
     private List<IBrowserFile> loadedFiles = new();
-    private long maxFileSize = 3000000;
+    private long maxFileSize = 15000000;
     private int maxAllowedFiles = 8;
     private bool isLoading;
     protected byte[] img;
+    
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
         isLoading = true;
         loadedFiles.Clear();
+        Apartament apartament = singleton.currentApartament;
 
         foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
         {
@@ -75,13 +88,14 @@ else
                 //var trustedFileNameForFileStorage = Path.GetRandomFileName();
                 var stream = file.OpenReadStream(maxFileSize);
                 img = new byte[stream.Length];
-                await stream.ReadAsync(img);
-                Apartament apartament = singleton.currentApartament;
+                //await stream.ReadAsync(img);
+                
                 //Apartament apartament = transientApartment.currentApartament;
-
+                await service.UploadImageToDBAsync(stream, file.Name);
+                
                 isLoading = false;
-                //ImgToDb.AddToDB(new ImgToDb(currentApartament, img));
-                DBMethods.AddImgToDB(new ImgToDb(apartament, img));
+                //ImgToDb.AddToDB(new ImgToDb(apartament, img, file.Name));
+                DBMethods.AddImgToDB(new ImgToDb(apartament, file.Name));
             }
 
             catch (Exception ex)
@@ -89,6 +103,6 @@ else
                 await qqq.InvokeVoidAsync("logError", ex);
             }
         }
-
+ 
     }
 }

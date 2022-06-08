@@ -11,6 +11,8 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<SingletonService>();
 builder.Services.AddTransient<TransientService>();
+builder.Services.AddSingleton<ApartamentService>();
+builder.Services.AddTransient<GridFSService>();
 
 var app = builder.Build();
 

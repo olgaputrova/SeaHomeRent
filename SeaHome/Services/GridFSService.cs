@@ -23,6 +23,7 @@ namespace SeaHome.Services
 
         public async Task DeleteImage(string name)
         {
+            DBMethods.DeleteOneImageDB(name);
             MongoClient client = new MongoClient(conectionString);
             IMongoDatabase database = client.GetDatabase("Images");
             IGridFSBucket gridFs = new GridFSBucket(database);
@@ -30,14 +31,14 @@ namespace SeaHome.Services
             var gridFileInfo = gridFs.Find(filter).FirstOrDefault();
             var id = gridFileInfo.Id;
             await gridFs.DeleteAsync(id);
-            File.Delete($"{Directory.GetCurrentDirectory()}/wwwroot/images/{name}.jpg");
+            File.Delete($"{Directory.GetCurrentDirectory()}/wwwroot/images/{name}");
 
             //using (FileStream fs = new FileStream("E:/Projects/SeaHomeRent/SeaHome/wwwroot/boot.jpg", FileMode.Open))
             //{
             //    await gridFs.UploadFromStreamAsync(name, fs);
             //}
             
-            DBMethods.DeleteOneImageDB(name);
+            
         }
 
         public void DownloadImageToWWWRoot(string filename)

@@ -46,7 +46,7 @@ else
                                 <td>@item.Text</td>
                                 <td>стоимость: @item.Price</td>
                                 <td>этаж: @item.Floor</td>
-                                <td><button class="btn btn-link" >Редактировать</button></td>
+                                <td><a class="btn btn-link" @onclick="(() => singleton.SetCurrentApartament(item))" href="yourAnnounce">Редактировать</a></td>
                             </tr>
                             <tr>
                                 @if (apartmentService.GetImages(item).Count == 0)

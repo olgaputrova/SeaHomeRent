@@ -21,6 +21,10 @@ namespace SeaHome.Services
             currentUser.PhoneNumber = phoneNumber;
             DBMethods.EditUserDB(currentUser);
         }
+        public void SetCurrentApartament(Apartament apartament)
+        {
+            currentApartament = apartament;
+        }
         
     }
 

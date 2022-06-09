@@ -21,6 +21,13 @@ namespace SeaHome
             var collection = database.GetCollection<User>("Users");
             collection.InsertOne(user);
         }
+        public static void EditUserDB(User user)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<User>("Users");
+            collection.ReplaceOne(x => x._id == user._id, user);
+        }
 
         public static User Authorization(string login, string password)
         {

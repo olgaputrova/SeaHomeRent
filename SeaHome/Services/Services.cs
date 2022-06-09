@@ -16,6 +16,11 @@ namespace SeaHome.Services
             currentApartament = new Apartament();
             Console.WriteLine(currentUser.Name);
         }
+        public void EditPhoneNumber(string phoneNumber)
+        {
+            currentUser.PhoneNumber = phoneNumber;
+            DBMethods.EditUserDB(currentUser);
+        }
         
     }
 

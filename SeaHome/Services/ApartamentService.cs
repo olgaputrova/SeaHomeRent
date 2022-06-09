@@ -22,7 +22,7 @@ namespace SeaHome.Services
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<Apartament>("Apartaments");
             
-            List<Apartament> listOfApartaments = collection.Find(x => x.User == user).ToList();          
+            List<Apartament> listOfApartaments = collection.Find(x => x.User._id == user._id).ToList();          
             return listOfApartaments;
         }
 
@@ -32,7 +32,7 @@ namespace SeaHome.Services
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<ImgToDb>("Images");
 
-            List<ImgToDb> listOfImages = collection.Find(x => x.Apartament == apartament).ToList();
+            List<ImgToDb> listOfImages = collection.Find(x => x.Apartament._id == apartament._id).ToList();
             return listOfImages;
         }
 

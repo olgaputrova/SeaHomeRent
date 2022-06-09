@@ -2,6 +2,9 @@
 @using SeaHome.Services
 @inject TransientService transientApartment
 @inject SingletonService singleton
+@inject ApartamentService apartmentService
+@inject GridFSService service
+
 
 <h3>Ваше объявление</h3>
 
@@ -61,15 +64,32 @@
         <label for="inputPrice">стоимость аренды</label>
         <input type="number" @bind-value="@price" id="inputPrice" placeholder="@singleton.currentApartament.Price"></input>
      </div><br/>
-     
-  
-
-  
-
-  <button class="btn btn-primary" type="submit" @onclick="EditApartment">Редактировать объявление</button>
+ <table>
+     <tr>    
+        @if (apartmentService.GetImages(singleton.currentApartament).Count == 0)
+            {
+               <td>фотографии не добавлены</td>
+            }
+        else
+            {
+               foreach(var item in apartmentService.GetImages(singleton.currentApartament))
+               {
+                   service.DownloadImageToWWWRoot(item.Name);
+                   
+                   <td>
+                       <img src="/images/@service.file" width="150px"/>
+                       <button class="btn btn-danger align-top" @onclick="(()=>service.DeleteImage(item.Name))">x</button>
+                   </td>
+               }
+            }
+    </tr>
+</table>
+<br />
+<FileUpload></FileUpload><br /><br />
+  <button class="btn btn-primary" type="submit" @onclick="EditApartment">Сохранить изменения</button>
   <button class="btn btn-danger" @onclick="DeleteApartament">Удалить объявление</button>
 </form>
-<br /><br />
+
 
          
 
@@ -80,7 +100,7 @@
       </div>
     </form>*@
 
-     <FileUpload></FileUpload>
+     
 
 @code {
     private string text;

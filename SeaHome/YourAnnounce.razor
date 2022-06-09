@@ -115,7 +115,7 @@
     public void DeleteApartament()
     {
         
-        foreach (var item in DBMethods.GetImagesOfAppartmentDB(singleton.currentApartament))
+        foreach (var item in apartmentService.GetImages(singleton.currentApartament))
         {
             service.DeleteImage(item.Name);
         }

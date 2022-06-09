@@ -89,17 +89,6 @@
   <button class="btn btn-primary" type="submit" @onclick="EditApartment">Сохранить изменения</button>
   <button class="btn btn-danger" @onclick="DeleteApartament">Удалить объявление</button>
 </form>
-
-
-         
-
-    @*<form>
-    <div class="form-group">
-        <label for="FormControlFile1">загрузить фото</label>
-        <input type="file" class="form-control-file" id="FormControlFile1">
-      </div>
-    </form>*@
-
      
 
 @code {
@@ -125,8 +114,14 @@
 
     public void DeleteApartament()
     {
-        DBMethods.RemoveImagesFromDB(singleton.currentApartament);
+        
+        foreach (var item in DBMethods.GetImagesOfAppartmentDB(singleton.currentApartament))
+        {
+            service.DeleteImage(item.Name);
+        }
+        //DBMethods.RemoveImagesFromDB(singleton.currentApartament);
         DBMethods.DeleteApartamentDB(singleton.currentApartament);
+        singleton.currentApartament = new Apartament();
     }
 
 }

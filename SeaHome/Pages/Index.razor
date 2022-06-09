@@ -1,5 +1,9 @@
 ﻿@page "/"
+@using SeaHome.Services
 @inject IJSRuntime JSRuntime
+@inject SingletonService singleton
+@inject ApartamentService apartmentService
+@inject GridFSService service
 
 @*<h1>Display Google Map</h1>
 <div id="map" style="height:400px;width:100%;">
@@ -17,7 +21,29 @@
         <iframe src="https://yandex.ru/map-widget/v1/-/CCUJaRuMKC" width="80%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;">
         </iframe>
 </div>
-
+<table>
+    @foreach (var item in apartmentService.GetApartaments())
+    {
+       <tbody class="border-2">
+            <tr>
+                <td>стоимость: @item.Price</td>
+                <td>@item.Text</td>
+                <td>этаж: @item.Floor</td>
+                <td><a class="btn btn-link" @onclick="(() => singleton.SetCurrentApartament(item))" href="yourAnnounce">Открыть</a></td>
+            @if (apartmentService.GetImages(item).Count == 0)
+                {
+                    <td>фотографии не добавлены</td>
+                }
+            else
+                {
+                    ImgToDb imageDB = apartmentService.GetImage(item);
+                    service.DownloadImageToWWWRoot(imageDB.Name);
+                    <td><img src="/images/@service.file" width="200px"/></td>
+                }
+            </tr>
+        </tbody>
+     }
+</table>
 
 <h1>Hello, world!</h1>
 

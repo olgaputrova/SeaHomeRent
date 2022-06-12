@@ -6,10 +6,15 @@
 @inject GridFSService service
 
 
-<h3>CurrentApartament</h3>
-<div>@singleton.currentApartament.Text</div>
-<div>@singleton.currentApartament.Price</div>
-<div>@singleton.currentApartament.Floor.ToString()</div>
+<div>описание объекта:</div>
+<h4>@singleton.currentApartament.Text</h4>
+<div>стоимость: @singleton.currentApartament.Price руб/сутки</div>
+<div>этаж: @singleton.currentApartament.Floor.ToString()</div>
+<div>этажность здания: @singleton.currentApartament.Floor.ToString()</div>
+<br />
+<div>контактное лицо: @singleton.currentApartament.User.Name</div>
+<div class="btn btn-link">телефон: @singleton.currentApartament.User.PhoneNumber</div>
+<br /><br />
 
 @if(apartmentService.GetImages(singleton.currentApartament).Count == 0)
 {
@@ -18,17 +23,7 @@
 else
 {   
 <div id="currentApartament" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    @for(int i=0; i< apartmentService.GetImages(singleton.currentApartament).Count; i++)
-        {
-            if(i==0)
-            (
-                <li data-target="#currentApartament" data-slide-to="@i" class="active"></li>
-            )
-            else
-        }
-  </ol>
-
+  
   <div class="carousel-inner">
         @foreach(var item in apartmentService.GetImages(singleton.currentApartament))
             {

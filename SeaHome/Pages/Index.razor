@@ -9,7 +9,7 @@
 <div id="map" style="height:400px;width:100%;">
 </div>*@
 
-<form>
+<form align="center">
 <div style="position:relative;overflow:hidden;">
     <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps" 
         style="color:#eee;font-size:12px;position:absolute;top:0px;">
@@ -19,32 +19,40 @@
         style="color:#eee;font-size:12px;position:absolute;top:14px;">
         Яндекс Карты — транспорт, навигация, поиск мест
     </a>
-        <iframe src="https://yandex.ru/map-widget/v1/-/CCUJaRuMKC" width="80%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;">
+        <iframe src="https://yandex.ru/map-widget/v1/-/CCUJaRuMKC" width="90%" height="400" class="border border-primary" frameborder="3" allowfullscreen="true" style="position:relative;">
         </iframe>
 </div>
-<table>
+<br /><br />
+<table align="center" width="60%">
     @foreach (Apartament item in apartmentService.GetApartaments())
     {
-       <tbody class="border-2">
+       <tbody class="border-1">
             <tr>
-                <td>стоимость: @item.Price</td>
-                <td>@item.Text</td>
-                <td>этаж: @item.Floor</td>
-                <td>
-                    <a href="currentApartament">
-                        <button class="btn btn-secondary" @onclick='(()=>singleton.SetCurrentApartament(item))'>Открыть</button> 
-                    </a>
-                 </td>
-            @if (apartmentService.GetImages(item).Count == 0)
-                {
-                    <td>фотографии не добавлены</td>
-                }
-            else
-                {
-                    ImgToDb imageDB = apartmentService.GetImage(item);
-                    service.DownloadImageToWWWRoot(imageDB.Name);
-                    <td><a @onclick="(() => singleton.SetCurrentApartament(item))" href="currentApartament" ><img src="/images/@service.file" width="200px" /></a></td>
-                }
+                <td class="p-3">
+                    <tr>стоимость: @item.Price</tr><br/>
+                    <tr><textbox rows="5">@item.Text</textbox></tr>
+                    <br/>
+                    <tr>этаж: @item.Floor</tr>
+                    <tr>этажность здания: @item.HouseFloor</tr>
+                    <tr>
+                        <a href="currentApartament">
+                            <button class="btn btn-link" @onclick='(()=>singleton.SetCurrentApartament(item))'>Открыть</button> 
+                        </a>
+                    </tr>
+                </td>
+                <td class="p-3">
+                    @if (apartmentService.GetImages(item).Count == 0)
+                        {
+                            <td>фотографии не добавлены</td>
+                        }
+                    else
+                        {
+                            ImgToDb imageDB = apartmentService.GetImage(item);
+                            service.DownloadImageToWWWRoot(imageDB.Name);
+                            <td><a @onclick="(() => singleton.SetCurrentApartament(item))" href="currentApartament" ><img src="/images/@service.file" width="300px" /></a></td>
+                        }
+                </td>
+                
             </tr>
         </tbody>
      }

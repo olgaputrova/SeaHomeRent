@@ -9,6 +9,7 @@
 <div id="map" style="height:400px;width:100%;">
 </div>*@
 
+<form>
 <div style="position:relative;overflow:hidden;">
     <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps" 
         style="color:#eee;font-size:12px;position:absolute;top:0px;">
@@ -22,14 +23,18 @@
         </iframe>
 </div>
 <table>
-    @foreach (var item in apartmentService.GetApartaments())
+    @foreach (Apartament item in apartmentService.GetApartaments())
     {
        <tbody class="border-2">
             <tr>
                 <td>стоимость: @item.Price</td>
                 <td>@item.Text</td>
                 <td>этаж: @item.Floor</td>
-                <td><a class="btn btn-link" @onclick="(() => singleton.SetCurrentApartament(item))" href="yourAnnounce">Открыть</a></td>
+                <td>
+                    <a href="currentApartament">
+                        <button class="btn btn-secondary" @onclick='(()=>singleton.SetCurrentApartament(item))'>Открыть</button> 
+                    </a>
+                 </td>
             @if (apartmentService.GetImages(item).Count == 0)
                 {
                     <td>фотографии не добавлены</td>
@@ -38,26 +43,10 @@
                 {
                     ImgToDb imageDB = apartmentService.GetImage(item);
                     service.DownloadImageToWWWRoot(imageDB.Name);
-                    <td><img src="/images/@service.file" width="200px"/></td>
+                    <td><a @onclick="(() => singleton.SetCurrentApartament(item))" href="currentApartament" ><img src="/images/@service.file" width="200px" /></a></td>
                 }
             </tr>
         </tbody>
      }
 </table>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
-
-
-@code{
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("initialize", null); 
-        }
-    }
-}
+</form>

@@ -17,6 +17,7 @@ namespace SeaHome
         private Apartament _apartament;
         public Apartament Apartament { get { return _apartament; } set { _apartament = value; } }
         public string Name { get; set; }
+        //public bool IsMain { get; set; }
         //public byte[] img;
 
         public ImgToDb(Apartament apartament, string name)
@@ -24,6 +25,7 @@ namespace SeaHome
             Apartament = apartament;
             //this.img = img;
             Name = name;
+            //IsMain = false;
         }
 
 

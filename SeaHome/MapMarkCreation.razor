@@ -1,0 +1,47 @@
+﻿@page "/markCreation"
+@using SeaHome.Services
+
+@inject IJSRuntime JSRuntime
+@inject SingletonService singleton
+@inject ApartamentService apartmentService
+@inject GridFSService service
+
+<h5>Добавить точку на карте</h5>
+<div>Добавьте координты точки</div>
+<label for="markLatitude">широта:</label>
+<input type="text" @bind-value="@latitude" id="markLatitude" />
+<label for="markLongitude">долгота:</label>
+<input type="text" @bind-value="@longitude" id="markLongitude" />
+<div>
+	<label for="shortText">Добавьте краткое описание объекта</label>
+    <input type="text" id="shortText" @bind="@shortText"/>
+</div>
+<div>
+	<label for="markNumber">Добавьте номер объекта (необязательно)</label>
+    <input type="text" id="markNumber" @bind="@markNumber"/>
+</div><br />
+<button class="btn btn-secondary" @onclick="CreateMapMark">Сохранить отметку на карте</button>
+
+
+@code {
+	string markNumber;
+	string latitude;
+	string longitude;
+	string shortText;
+
+	public void CreateMapMark()
+	{
+		MapMark mapMark = new MapMark(singleton.currentApartament, shortText, latitude, longitude, markNumber);
+		DBMethods.AddMapMarkToDB(mapMark);
+
+	}
+
+	//protected override async Task OnAfterRenderAsync(bool firstRender)
+ //   {
+ //       if (firstRender)
+ //       {
+ //           await JSRuntime.InvokeVoidAsync("update", shortText, latitude, longitude, markNumber); 
+ //       }
+ //   }
+
+}

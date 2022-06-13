@@ -79,15 +79,23 @@ namespace SeaHome
             var collection = database.GetCollection<ImgToDb>("Images");
             collection.DeleteOne(x => x.Name == name);
         }
-        //public static List<ImgToDb> GetImagesOfAppartmentDB(Apartament apartament)
-        //{
-        //    var client = new MongoClient("mongodb://localhost");
-        //    var database = client.GetDatabase("SeaHome");
-        //    var collection = database.GetCollection<ImgToDb>("Images");
+        public static void AddMapMarkToDB(MapMark mapMark)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<MapMark>("MapMarks");
+            collection.InsertOne(mapMark);
+        }
 
-        //    List<ImgToDb> listOfImages = collection.Find(x => x.Apartament._id == apartament._id).ToList();
-        //    return listOfImages;
-        //}
+        public static List<MapMark> GetMapMarksFromDB()
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<MapMark>("MapMarks");
+
+            List<MapMark> listOfMapMarks = collection.Find(x => true).ToList();
+            return listOfMapMarks;
+        }
 
         //public static List<String> ShowApartaments(User user)
         //{

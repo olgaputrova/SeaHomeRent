@@ -12,27 +12,6 @@
 
 <h4>Добавьте изображение</h4>
 
-@*<p>
-    <label>
-        Max file size:
-        <input type="number" @bind="maxFileSize" />
-    </label>
-</p>
-
-<p>
-    <label>
-        Max allowed files:
-        <input type="number" @bind="maxAllowedFiles" />
-    </label>
-</p>*@
-
-@*<form>
-    <div class="form-group">
-        <label for="FormControlFile1">загрузить фото</label>
-        <input type="file" class="form-control-file" id="FormControlFile1">
-      </div>
-</form>*@
-
 <p>
         Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
         <InputFile OnChange="@LoadFiles" multiple="multiple" />
@@ -62,7 +41,7 @@ else
 }
 
 @code {
-    //User user = new User();
+    
     [Inject] GridFSService service{ get; set; }
     
 

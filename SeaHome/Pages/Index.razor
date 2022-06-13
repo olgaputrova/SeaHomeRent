@@ -94,7 +94,8 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("init", null); 
+            //var par = new { points = new object[] { new { latitude = 14, longitude = 13, title = "metka" }, new { latitude = 19, longitude = 132, title = "metka2" } } };
+            await JSRuntime.InvokeVoidAsync("init", DBMethods.GetMapMarksFromDB()); 
         }
     }
 }

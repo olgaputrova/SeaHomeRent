@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\placemark.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="angular-google-maps" Version="2.4.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.16.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.16.0" />

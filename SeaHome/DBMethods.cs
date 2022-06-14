@@ -126,6 +126,14 @@ namespace SeaHome
             List<MapMark> listOfMapMarks = collection.Find(x => true).ToList();
             return listOfMapMarks;
         }
+        public static MapMark GetSingleMapMarkDB(Apartament apartament)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<MapMark>("MapMarks");
+            var item = collection.Find(x => x.Apartament._id == apartament._id).FirstOrDefault();
+            return item;
+        }
 
         //public static List<String> ShowApartaments(User user)
         //{

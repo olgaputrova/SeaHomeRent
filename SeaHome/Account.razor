@@ -42,23 +42,24 @@ else
                     {
                         <tbody class="border-2">
 
-                            <tr>
-                                <td>@item.Text</td>
+                            <tr class="m-3 p-3">
+                                <td class="col m-3 p-3"><textbox rows="5">@item.Text</textbox></td>
                                 <td>стоимость: @item.Price</td>
                                 <td>этаж: @item.Floor</td>
+                                <td>количество этажей в здании: @item.HouseFloor</td>
                                 <td><a class="btn btn-link" @onclick="(() => singleton.SetCurrentApartament(item))" href="yourAnnounce">Редактировать</a></td>
                             </tr>
-                            <tr>
+                            <tr class="m-3 p-8 align-items-sm-start">
                                 @if (apartmentService.GetImages(item).Count == 0)
                                 {
-                                    <td>фотографии не добавлены</td>
+                                    <td class="m-8 p-8">фотографии не добавлены</td>
                                 }
                                 else
                                 {
                                     foreach(var item_1 in apartmentService.GetImages(item))
                                     {
                                         service.DownloadImageToWWWRoot(item_1.Name);
-                                        <td><img src="/images/@service.file" width="150px"/></td>
+                                        <td class="m-8 p-8"><img src="/images/@service.file" width="150px"/></td>
                                     }
                                 }
                             </tr>
@@ -73,21 +74,7 @@ else
 
 @code 
 {
-    [Parameter]
-    public List<Apartament> _apartaments { get; set; }
-
     private string phoneNumber;
-    private User user;
-    private Apartament apartament;
-
-    public void EditPhone()
-    {
-
-    }
-    public void ShowImage()
-    {
-        //DBMethods.ShowApartaments(singleton.currentUser);
-    }
-
+    
 }
 

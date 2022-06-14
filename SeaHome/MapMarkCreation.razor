@@ -21,7 +21,7 @@
 
 
 @code {
-	
+
 	string latitude;
 	string longitude;
 	string shortText;
@@ -30,7 +30,18 @@
 	{
 		MapMark mapMark = new MapMark(singleton.currentApartament, shortText, latitude, longitude);
 		DBMethods.AddMapMarkToDB(mapMark);
+		singleton.SetCurrentMapMark(mapMark);
 
 	}
+	protected override async Task OnInitializedAsync() 
+	{
+		if(DBMethods.GetSingleMapMarkDB(singleton.currentApartament) != null)
+		{
+			singleton.SetCurrentMapMark(DBMethods.GetSingleMapMarkDB(singleton.currentApartament));
+			latitude = singleton.currentMapMark.Latitude;
+			longitude = singleton.currentMapMark.Longitude;
+			shortText = singleton.currentMapMark.ShortText;
+		}
+    }
 
 }

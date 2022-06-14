@@ -16,9 +16,8 @@
 
      <div>
         <label for="selectFloor">этаж</label>
-        <input type="number" @bind-value="@floor" id="selectFloor" placeholder="@singleton.currentApartament.Floor" />
-        @*<select class="custom-select custom-select-lg mb-3" id="selectFloor" @bind="@floor">
-          <option selected value="@singleton.currentApartament.Floor">@singleton.currentApartament.Floor</option>
+        <select class="custom-select custom-select-lg mb-3" id="selectFloor" @bind="@floor">
+          <option selected value="@floor">@singleton.currentApartament.Floor</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -36,11 +35,11 @@
           <option value="15">15</option>
           <option value="16">16</option>
           <option value="17">17</option>
-        </select>*@<br/>
+        </select><br/>
      
          <label for="selectHouseFloor">этажность здания</label>
          <select class="custom-select my-1 mr-sm-2" id="selectHouseFloor" @bind="@houseFloor">
-          <option  selected value="@singleton.currentApartament.HouseFloor">@singleton.currentApartament.HouseFloor</option>
+          <option  selected value="@houseFloor">@singleton.currentApartament.HouseFloor</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -63,7 +62,7 @@
 
      <div class="form-group">
         <label for="inputPrice">стоимость аренды</label>
-        <input type="number" @bind-value="@price" id="inputPrice" step="50" placeholder="@singleton.currentApartament.Price"></input>
+        <input type="number" @bind-value="@price" id="inputPrice" step="50" placeholder="@price"></input>
      </div><br/>
  <table>
      <tr>    
@@ -125,6 +124,14 @@
         DBMethods.RemoveMapMarkFromDB(singleton.currentApartament);
         DBMethods.DeleteApartamentDB(singleton.currentApartament);
         singleton.currentApartament = new Apartament();
+    }
+
+    protected override async Task OnInitializedAsync() 
+    {
+        text = singleton.currentApartament.Text;
+        floor = singleton.currentApartament.Floor;
+        houseFloor = singleton.currentApartament.HouseFloor;
+        price = singleton.currentApartament.Price;
     }
 
 }

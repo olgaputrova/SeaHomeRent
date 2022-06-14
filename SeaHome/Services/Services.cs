@@ -9,11 +9,13 @@ namespace SeaHome.Services
     {
         public User currentUser; // { get; set; }
         public Apartament currentApartament;
-                
+        public MapMark currentMapMark;
+                        
         public SingletonService()
         {
             currentUser = new User();
             currentApartament = new Apartament();
+            currentMapMark = new MapMark();
             Console.WriteLine(currentUser.Name);
         }
         public void EditPhoneNumber(string phoneNumber)
@@ -25,7 +27,10 @@ namespace SeaHome.Services
         {
             currentApartament = apartament;
         }
-        
+        public void SetCurrentMapMark(MapMark mapMark)
+        {
+            currentMapMark = mapMark;
+        }
     }
 
     public class TransientService

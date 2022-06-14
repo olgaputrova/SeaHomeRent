@@ -19,7 +19,11 @@ namespace SeaHome
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<User>("Users");
-            collection.InsertOne(user);
+            if (collection.Find(x => x.Login == user.Login) != null)
+            {
+                collection.FindOneAndReplace(x => x.Login == user.Login, user);
+            }
+            else { collection.InsertOne(user); }
         }
         public static void EditUserDB(User user)
         {
@@ -38,6 +42,14 @@ namespace SeaHome
             var item = collection.Find(x => x.Login == login && x.Password == password).FirstOrDefault();
             // Передаем в метод троки их тега input и если найдено соответсвие по 2м параметрам, метод вернет объект, в противном случае вернет null.
             return item;
+        }
+
+        public static void DeleteUserDB(User user)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<User>("Users");
+            collection.DeleteOne(x => x.Login == user.Login);
         }
 
         public static void AddApartamentToDB(Apartament apartament)
@@ -64,7 +76,13 @@ namespace SeaHome
             var collection = database.GetCollection<Apartament>("Apartaments");
             collection.DeleteOne (x => x._id == apartament._id);
         }
-
+        public static void DeleteManyApartamentsDB(User user)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<Apartament>("Apartaments");
+            collection.DeleteMany(x => x.User._id == user._id);
+        }
         public static void RemoveImagesFromDB (Apartament apartament)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -84,7 +102,19 @@ namespace SeaHome
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<MapMark>("MapMarks");
-            collection.InsertOne(mapMark);
+            if (collection.Find(x => x.Apartament._id == mapMark.Apartament._id) != null)
+            {
+                collection.FindOneAndReplace(x => x.Apartament._id == mapMark.Apartament._id, mapMark);
+            }
+            else { collection.InsertOne(mapMark); }
+        }
+
+        public static void RemoveMapMarkFromDB(Apartament apartament)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<ImgToDb>("Images");
+            collection.DeleteOne(x => x.Apartament._id == apartament._id);
         }
 
         public static List<MapMark> GetMapMarksFromDB()

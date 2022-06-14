@@ -11,13 +11,13 @@ namespace SeaHome
         [BsonIgnoreIfDefault]
         public ObjectId _id { get; set; }
 
-        public MapMark(Apartament apartament, string shortText, string latitude, string longitude, string markNumber)
+        public MapMark(Apartament apartament, string shortText, string latitude, string longitude)
         {
             Apartament = apartament;
             ShortText = shortText;
             Latitude = latitude;
             Longitude = longitude;
-            MarkNumber = markNumber;
+            MarkNumber = "z";
         }
 
         public MapMark()

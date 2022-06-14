@@ -16,9 +16,16 @@
     //var myGeoObjects = new ymaps.geoObjects();
     
     console.log(params.marks);
+    
     params.marks.forEach(mark => {
-        console.log(mark);
-        var myPlacemark = new ymaps.Placemark([mark.latitude, mark.longitude], { iconContent: mark.shortText }, { preset: 'islands#darkBlueStretchyIcon'});
+        console.log(mark._id);
+        var myPlacemark = new ymaps.Placemark([mark.latitude, mark.longitude], { iconContent: mark.shortText }, { preset: 'islands#darkBlueStretchyIcon' });
+        myPlacemark._id = mark.apartament._id;
+        myPlacemark.events.add([
+            'click'
+        ], function (e) {
+            console.log(myPlacemark._id);
+        });
         clusterer.add(myPlacemark);
     });
 

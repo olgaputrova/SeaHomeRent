@@ -54,9 +54,37 @@ else
     
 </div>
 }
+<br /><br />
+<button class="btn btn-secondary" @onclick="ShowMapMark">Показать объект на карте</button><br />
+
+    <div id="map" style="height:400px;width:90%;"></div>
 <br /><br /><br />
 
 @code {
     int j = 1;
 
+
+    public void ShowMapMark()
+    {
+        singleton.currentMapMark = DBMethods.GetSingleMapMarkDB(singleton.currentApartament);
+        if(singleton.currentMapMark != null)
+        {
+
+            JSRuntime.InvokeVoidAsync("init_1", singleton.currentMapMark );
+        }
+    }
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+                //await JSRuntime.InvokeVoidAsync("init_1", new { Mark = singleton.currentMapMark });
+             
+    //    }
+    //}
+
+    //protected override async Task OnInitializedAsync() 
+    //{
+    //    await JSRuntime.InvokeVoidAsync("init_1", new { Mark = singleton.currentMapMark });
+    //}
 }

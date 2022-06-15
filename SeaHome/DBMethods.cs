@@ -67,6 +67,15 @@ namespace SeaHome
             var collection = database.GetCollection<Apartament>("Apartaments");
             collection.ReplaceOne(x => x._id == currentApartament._id, newApartament);
 
+        }  
+        
+        public static Apartament GetApartamentByMapMark(MapMark mapMark)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<Apartament>("Apartaments");
+            Apartament item = collection.Find(x => x._id == mapMark.Apartament._id).FirstOrDefault();
+            return item;
         }
 
         public static void DeleteApartamentDB (Apartament apartament)
@@ -104,6 +113,7 @@ namespace SeaHome
             var collection = database.GetCollection<MapMark>("MapMarks");
             if (collection.Find(x => x.Apartament._id == mapMark.Apartament._id) != null)
             {
+                MapMark.SetNumberMapMark(mapMark);
                 collection.FindOneAndReplace(x => x.Apartament._id == mapMark.Apartament._id, mapMark);
             }
             else { collection.InsertOne(mapMark); }
@@ -132,6 +142,14 @@ namespace SeaHome
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<MapMark>("MapMarks");
             var item = collection.Find(x => x.Apartament._id == apartament._id).FirstOrDefault();
+            return item;
+        }
+        public static MapMark GetMapMarkByNumber(string number)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SeaHome");
+            var collection = database.GetCollection<MapMark>("MapMarks");
+            var item = collection.Find(x => x.MarkNumber == number).FirstOrDefault();
             return item;
         }
 

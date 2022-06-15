@@ -17,7 +17,7 @@ namespace SeaHome
             ShortText = shortText;
             Latitude = latitude;
             Longitude = longitude;
-            MarkNumber = "z";
+            MarkNumber = latitude + longitude;
         }
 
         public MapMark()
@@ -36,6 +36,9 @@ namespace SeaHome
         public string Latitude { get => _latitude; set => _latitude = value; }
         public string Longitude { get => _longitude; set => _longitude = value; }
 
-        
+        public static void SetNumberMapMark(MapMark mapMark)
+        {
+            mapMark.MarkNumber = mapMark.Latitude + mapMark.Longitude;
+        }
     }
 }

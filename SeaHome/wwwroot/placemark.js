@@ -20,11 +20,12 @@
     params.marks.forEach(mark => {
         console.log(mark._id);
         var myPlacemark = new ymaps.Placemark([mark.latitude, mark.longitude], { iconContent: mark.shortText }, { preset: 'islands#darkBlueStretchyIcon' });
-        myPlacemark._id = mark.apartament._id;
+        myPlacemark.name = mark._markNumber;
         myPlacemark.events.add([
             'click'
         ], function (e) {
-            console.log(myPlacemark._id);
+            console.log(mark);
+            location.href = '/viewApartament/' + mark.markNumber.replaceAll('.', '_');
         });
         clusterer.add(myPlacemark);
     });

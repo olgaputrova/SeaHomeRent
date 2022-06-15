@@ -19,11 +19,12 @@ namespace SeaHome
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<User>("Users");
-            if (collection.Find(x => x.Login == user.Login) != null)
-            {
-                collection.FindOneAndReplace(x => x.Login == user.Login, user);
-            }
-            else { collection.InsertOne(user); }
+            collection.InsertOne(user);
+            //if (collection.Find(x => x.Login == user.Login) != null)
+            //{
+            //    collection.FindOneAndReplace(x => x.Login == user.Login, user);
+            //}
+            //else { collection.InsertOne(user); }
         }
         public static void EditUserDB(User user)
         {
@@ -111,12 +112,13 @@ namespace SeaHome
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("SeaHome");
             var collection = database.GetCollection<MapMark>("MapMarks");
-            if (collection.Find(x => x.Apartament._id == mapMark.Apartament._id) != null)
-            {
-                MapMark.SetNumberMapMark(mapMark);
-                collection.FindOneAndReplace(x => x.Apartament._id == mapMark.Apartament._id, mapMark);
-            }
-            else { collection.InsertOne(mapMark); }
+            collection.InsertOne(mapMark);
+            //if (collection.Find(x => x.Apartament._id == mapMark.Apartament._id) != null)
+            //{
+            //    MapMark.SetNumberMapMark(mapMark);
+            //    collection.FindOneAndReplace(x => x.Apartament._id == mapMark.Apartament._id, mapMark);
+            //}
+            //else { collection.InsertOne(mapMark); }
         }
 
         public static void RemoveMapMarkFromDB(Apartament apartament)
